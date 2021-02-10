@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <main>
+        <section class="mb-3" id="intro">
+
+        </section>
+
+        <section id="selection" class="products-slide mb-5">
+            <div class="container">
+                <h1 class="text-uppercase text-center">mise en avant</h1>
+
+                <div class="owl-carousel owl-theme">
+                    {% for product in selection %}
+                        <div class="card border-0 rounded-0">
+                            <a href="{{ path('product_detail', {slug: product.slug}) }}">
+                                <img src="{{ product.image }}" alt="{{ product.slug }}" class="card-img rounded-0">
+                            </a>
+                            <div class="card-body text-center px-0 py-2">
+                                <p class="mb-1">
+                                    <a href="{{ path('product_detail', {slug: product.slug}) }}" class="product-name text-muted">
+                                        {{ product.name|capitalize }}
+                                    </a>
+                                </p>
+                                <p class="mb-0">
+                                    <span class="product-price">{{ product.price|number_format(null, null, ' ') }}F</span>
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section id="latest" class="products-slide mb-5">
+            <div class="container">
+                <h1 class="text-uppercase text-center">nouvel arrivage</h1>
+
+                <div class="owl-carousel owl-theme">
+                    {% for product in latest %}
+                        <div class="card border-0 rounded-0">
+                            <a href="{{ path('product_detail', {slug: product.slug}) }}">
+                                <img src="{{ product.image }}" alt="{{ product.slug }}" class="card-img rounded-0">
+                            </a>
+                            <div class="card-body text-center px-0 py-2">
+                                <p class="mb-1">
+                                    <a href="{{ path('product_detail', {slug: product.slug}) }}" class="product-name text-muted">
+                                        {{ product.name|capitalize }}
+                                    </a>
+                                </p>
+                                <p class="mb-0">
+                                    <span class="product-price">{{ product.price|number_format(null, null, ' ') }}F</span>
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

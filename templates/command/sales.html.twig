@@ -1,0 +1,20 @@
+{% extends 'base_3.html.twig' %}
+
+{% block body %}
+
+    <main class="pt-3 pt-md-0">
+        <div class="container">
+            <h1 class="text-center text-uppercase mb-3">ventes effectuées</h1>
+
+            <section class="card">
+                <div class="card-header bg-teal text-white font-poppins">
+                    <h4 class="font-poppins mb-0"><i class="fas fa-medal mr-1"></i>Ventes</h4>
+                </div>
+                <div class="card-body table-responsive">
+                    {% include 'command/command-table.html.twig' %}
+                </div>
+            </section>
+        </div>
+    </main>
+
+{% endblock %}

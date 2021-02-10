@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+<div class="form-group">
+    <label for="collection_category">Catégorie</label>
+    <select class="form-control" name="category">
+        <option value="{{ collection.category.id }}">{{ collection.category.name }}</option>
+        {% for category in categories %}
+            {% if category.id != collection.category.id %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+</div>
+{{ form_widget(form) }}
+<div class="text-center">
+    <button type="submit" class="btn btn-primary py-2 px-3">Enregistrer</button>
+</div>
+{{ form_end(form) }}

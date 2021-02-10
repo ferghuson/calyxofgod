@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compte{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <section class="mb-3">
+            <h1 class="text-uppercase text-center">mon compte</h1>
+            <p class="font-light text-capitalize text-center">
+                bonjour {% if customer.title == 'M.' %}monsieur{% else %}madame{% endif %} {{ customer.firstName }}
+            </p>
+            {% include 'partials/flash.html.twig' %}
+        </section>
+
+        <section class="row mb-3 mb-md-5 py-3 py-md-5">
+            <div class="col-md-1"></div>
+            <div class="col-12 col-md-10">
+                <div class="row text-center text-uppercase">
+                    <div class="col-12 col-md-3">
+                        <a href="{{ path('customer_edit') }}" class="nav-link">
+                            <i class="fas fa-address-book fa-3x"></i>
+                            <br>
+                            <span class="font-light">mes informations</span>
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <a href="{{ path('address_index') }}" class="nav-link">
+                            <i class="fas fa-home fa-3x"></i>
+                            <br>
+                            <span class="font-light">mes adresses</span>
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <a href="{{ path('customer_orders') }}" class="nav-link">
+                            <i class="fas fa-file-alt fa-3x"></i>
+                            <br>
+                            <span class="font-light">mes commandes</span>
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <a href="{{ path('customer_logout') }}" class="nav-link">
+                            <i class="fas fa-power-off fa-3x"></i>
+                            <br>
+                            <span class="font-light">déconnexion</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </section>
+    </main>
+{% endblock %}

@@ -1,0 +1,42 @@
+<table class="table border mb-0">
+    <thead class="bg-light text-center">
+    <tr>
+        <th></th>
+        <th>Client</th>
+        <th>Livraison</th>
+        <th>Total</th>
+        <th>Paiement</th>
+        <th class="text-capitalize">état</th>
+        <th>Reçu</th>
+        <th>Livré</th>
+    </tr>
+    </thead>
+    <tbody class="font-light text-center">
+    {% for command in commands %}
+        <tr>
+            <td>
+                <a href="{{ path('command_details', {id: command.id}) }}" class="text-teal">
+                    <i class="fa fa-search-plus"></i>
+                </a>
+            </td>
+            <td class="text-capitalize text-nowrap">
+                <a href="{{ path('customer_details', {id: command.customer.id}) }}">
+                    {{ command.customer.getFullName() }}
+                </a>
+            </td>
+            <td class="text-wrap">{{ command.address.district|capitalize }}</td>
+            <td class="text-nowrap">{{ (command.shipping+command.total)|number_format(null, null, ' ') }}F</td>
+            <td>{{ command.payment }}</td>
+            <td>{{ command.state }}</td>
+            <td>{{ command.receivedAt|date('d/m/Y H:i') }}</td>
+            <td>
+                {% if command.deliveredAt %}
+                    {{ command.deliveredAt|date('d/m/Y H:i') }}
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

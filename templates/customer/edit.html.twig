@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes informations{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <section class="text-center mb-3">
+            <h1 class="text-uppercase">mes informations</h1>
+            <p class="font-light">
+                N'hésitez pas à mettre à jour vos informations afin que votre compte soit à jour.
+            </p>
+            {% include 'partials/flash.html.twig' %}
+        </section>
+
+        <section class="row mb-3 mb-md-5">
+            <div class="col-12 col-md-6 offset-md-3">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-secondary rounded-0">
+                            mettre à jour mon compte
+                        </button>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </section>
+    </main>
+{% endblock %}

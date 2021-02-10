@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche{% endblock %}
+
+{% block body %}
+    <main class="container pt-3">
+        <section class="text-center">
+            <h1 class="text-uppercase">
+                résultat{% if products|length > 1 %}s{% endif %} pour
+                " <span class="text-muted">{{ keyword }}</span> "
+            </h1>
+        </section>
+        <section class="row mb-3 mb-md-4">
+            <div class="col-md-2"></div>
+            <div class="col-12 col-md-8">
+                <form action="{{ path('product_search') }}">
+                    <div class="input-group">
+                        <input type="search" class="form-control rounded-0" name="q" placeholder="Rechercher" required>
+                        <div class="input-group-append">
+                            <button type="submit" class="bg-teal text-white border-0">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-2"></div>
+        </section>
+        {% if products|length == 0 %}
+            <section class="bg-light text-center py-3 py-md-5 mb-3 mb-md-4">
+                <i class="fas fa-exclamation-triangle fa-3x text-warning"></i>
+                <p class="font-light mb-0">
+                    Aucun résultat pour votre recherche.
+                </p>
+            </section>
+        {% else %}
+            <section class="row">
+                {% for product in products %}
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div class="card border-0 rounded-0">
+                            <a href="{{ path('product_detail', {slug: product.slug}) }}">
+                                <img src="{{ product.image }}" alt="{{ product.slug }}" class="card-img rounded-0">
+                            </a>
+                            <div class="card-body text-center px-0 py-2">
+                                <p class="mb-1">
+                                    <a href="{{ path('product_detail', {slug: product.slug}) }}" class="product-name text-muted">
+                                        {{ product.name|capitalize }}
+                                    </a>
+                                </p>
+                                <p class="mb-0">
+                                    <span class="product-price">{{ product.price|number_format(null, null, ' ') }}F</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </section>
+        {% endif %}
+    </main>
+{% endblock %}

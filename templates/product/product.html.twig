@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name|capitalize }}{% endblock %}
+
+{% block body %}
+    <!-- BREADCRUMB -->
+    <section class="bg-light text-center">
+        <div class="container">
+            <ol class="breadcrumb mb-4 rounded-0 d-none d-md-flex justify-content-center bg-light">
+                <li class="breadcrumb-item">
+                    <a href="{{ path('home') }}">Accueil</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ path('collection_detail', {'slug' :product.section.slug}) }}">
+                        {{ product.section.name|capitalize }}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="font-light">{{ product.name|capitalize }}</span>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <main class="container">
+        <section class="row mb-5">
+            <div class="col-md-1"></div>
+            <div class="col-12 col-md-5 mb-3 mb-md-0">
+                <img src="{{ product.image }}" alt="{{ product.slug }}" class="img-fluid">
+            </div>
+            <div class="col-12 col-md-5">
+                {% set currentProduct = product.id %}
+                <h2 class="text-uppercase text-teal">{{ product.name|capitalize }}</h2>
+                <p class="mb-0">
+                    <span class="product-price text-dark">{{ product.price|number_format(null, null, ' ') }}F</span>
+                </p>
+
+                <hr>
+                <p class="font-light">
+                    {{ product.description }}
+                </p>
+                <p class="mb-0 font-light">
+                    <label for="delivery" class="text-uppercase text-muted">Livraion :</label> {{ product.delivery|capitalize }}
+                </p>
+                <hr>
+                <div class="form-group product-qty">
+                    <label for="quantity" class="text-uppercase text-muted">quantité</label>
+                    <input type="number" id="quantity" class="form-control rounded-0" min="1" value="1">
+                </div>
+                <hr>
+                <div class="row">
+                    <input type="hidden" value="{{ product.id }}" id="product">
+                    <div class="col-12 col-md-6">
+                        <a href="#" id="add-to-cart" class="purchase-btn btn btn-outline-secondary py-2 mb-3 mb-md-0 rounded-0">
+                            AJOUTER AU PANIER
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <a href="#" id="purchasing" class="purchase-btn btn btn-primary py-2 rounded-0">
+                            ACHETER MAINTENANT
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </section>
+
+        {% if product.features %}
+            <section class="container">
+                <h1 class="text-uppercase text-md-center">détails</h1>
+                <p class="font-light">{{ product.features }}</p>
+            </section>
+        {% endif %}
+
+        {% if product.section.products|length > 1 %}
+            <section id="related" class="products-slide mb-5">
+                <div class="container">
+                    <h1 class="text-uppercase text-md-center">vous aimerez aussi</h1>
+
+                    <div class="owl-carousel owl-theme">
+                        {% for product in product.section.products %}
+                            {% if product.id != currentProduct %}
+                                <div class="card border-0 rounded-0">
+                                    <a href="{{ path('product_detail', {slug: product.slug}) }}">
+                                        <img src="{{ product.image }}" alt="{{ product.slug }}" class="card-img rounded-0">
+                                    </a>
+                                    <div class="card-body text-center px-0 py-2">
+                                        <p class="mb-1">
+                                            <a href="{{ path('product_detail', {slug: product.slug}) }}" class="product-name text-muted">
+                                                {{ product.name|capitalize }}
+                                            </a>
+                                        </p>
+                                        <p class="mb-0">
+                                            <span class="product-price">{{ product.price|number_format(null, null, ' ') }}F</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/cart.js"></script>
+{% endblock %}

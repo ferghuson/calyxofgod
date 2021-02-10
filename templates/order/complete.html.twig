@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Merci !{% endblock %}
+
+{% block body %}
+
+    <main class="container">
+        <h1 class="text-center text-uppercase">merci</h1>
+
+        <section class="bg-light text-center py-3 py-md-5 mb-3 mb-md-4">
+            <i class="fas fa-check fa-5x text-teal"></i>
+            <p class="font-light mb-0">Votre commande a été bien reçu.</p>
+            <p class="font-light mb-0">
+                Les frais et date de livraison seront calculés et vous seront bientôt communiqué
+                soit par mail ou par appel téléphonique.
+            </p>
+            <p class="font-light mb-2">Votre commande sera traitée et expédiée juste après réception des frais.</p>
+            <a href="{{ path('home') }}" class="text-primary">
+                <i class="fas fa-home mr-1"></i>Accueil
+            </a>
+        </section>
+    </main>
+
+{% endblock %}

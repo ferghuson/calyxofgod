@@ -1,0 +1,25 @@
+<div class="table-responsive">
+    <table class="table bg-white border-bottom mb-0">
+        <thead>
+        <tr>
+            <th class="border-0">Produit</th>
+            <th class="text-center border-0">Quantité</th>
+            <th class="text-center border-0">Prix</th>
+            <th class="text-center border-0">Total</th>
+        </tr>
+        </thead>
+        <tbody class="font-light">
+        {% for detail in command.details %}
+            <tr>
+                <td class="text-nowrap">
+                    <img src="{{ detail.product.image }}" alt="{{ detail.product.slug }}" width="50" height="50">
+                    <span>{{ detail.product.name|capitalize }}</span>
+                </td>
+                <td class="text-center text-nowrap">{{ detail.quantity }}</td>
+                <td class="text-center text-nowrap">{{ detail.price|number_format(null, null, ' ') }}F</td>
+                <td class="text-center text-nowrap">{{ (detail.quantity * detail.price)|number_format(null, null, ' ') }}F</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

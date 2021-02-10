@@ -1,0 +1,107 @@
+{% extends 'base_3.html.twig' %}
+
+{% block body %}
+    <main class="bg-light py-3">
+        <div class="container">
+            <h1 class="text-center text-uppercase mb-3">tableau de bord</h1>
+
+            <section class="mb-3" id="statistics">
+                <div class="card text-uppercase">
+                    <section class="card-header bg-white">
+                        <h3 class="font-poppins mb-0"><i class="fas fa-chart-bar mr-1"></i>statistiques</h3>
+                    </section>
+                    <section class="card-body">
+                        <div class="row">
+                            <section class="col-12 col-sm-6 col-md-3">
+                                <div class="card card-body mb-3 mb-md-0 bg-teal text-white font-poppins rounded-0">
+                                    <div class="d-flex justify-content-between">
+                                        <i class="fas fa-medal fa-3x"></i>
+                                        <h3 class="mb-0">{{ sales }}</h3>
+                                    </div>
+                                    <p class="mb-0 text-right">
+                                        <a href="{{ path('command_sales') }}" class="text-white">ventes</a>
+                                    </p>
+                                </div>
+                            </section>
+                            <section class="col-12 col-sm-6 col-md-3">
+                                <div class="card card-body mb-3 mb-md-0 bg-warning text-white font-poppins rounded-0">
+                                    <div class="d-flex justify-content-between">
+                                        <i class="fas fa-tasks fa-3x"></i>
+                                        <h3 class="mb-0"> {{ commands|length }}</h3>
+                                    </div>
+                                    <p class="mb-0 text-right">
+                                        <a href="{{ path('command_index') }}" class="text-white">commandes</a>
+                                    </p>
+                                </div>
+                            </section>
+                            <section class="col-12 col-sm-6 col-md-3">
+                                <div class="card card-body mb-3 mb-md-0 bg-primary text-white font-poppins rounded-0">
+                                    <div class="d-flex justify-content-between">
+                                        <i class="fas fa-file-alt fa-3x"></i>
+                                        <h3 class="mb-0 text-right">{{ products }}</h3>
+                                    </div>
+                                    <p class="mb-0 text-right">
+                                        <a href="{{ path('product_all') }}" class="text-white">produits</a>
+                                    </p>
+                                </div>
+                            </section>
+                            <section class="col-12 col-sm-6 col-md-3">
+                                <div class="card card-body bg-purple font-poppins rounded-0">
+                                    <div class="d-flex justify-content-between">
+                                        <i class="fas fa-users fa-3x"></i>
+                                        <h3 class="mb-0">{{ customers }}</h3>
+                                    </div>
+                                    <p class="mb-0 text-right">
+                                        <a href="{{ path('customer_all') }}" class="text-white">clients</a>
+                                    </p>
+                                </div>
+                            </section>
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+            <section class="card text-uppercase">
+                <div class="card-header bg-white">
+                    <h3 class="font-poppins mb-0"><i class="fas fa-history mr-1"></i>commandes récentes</h3>
+                </div>
+                <div class="card-body table-responsive text-capitalize">
+                    <table class="table border-bottom mb-0 text-nowrap">
+                        <thead class="thead-dark text-center">
+                        <tr>
+                            <th class="border-0"></th>
+                            <th class="border-0">client</th>
+                            <th class="border-0">produits</th>
+                            <th class="border-0">total</th>
+                            <th class="text-capitalize border-0">état</th>
+                            <th class="border-0">date</th>
+                        </tr>
+                        </thead>
+                        <tbody class="font-light text-center">
+                        {% for command in commands %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('command_details', {id: command.id}) }}" class="text-teal">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('customer_details', {id: command.customer.id}) }}">
+                                        {{ command.customer.getFullName() }}
+                                    </a>
+                                </td>
+                                <td>{{ command.details|length }}</td>
+                                <td>
+                                    {{ (command.shipping + command.total)|number_format(null, null, ' ') }}F
+                                </td>
+                                <td>{{ command.state }}</td>
+                                <td>{{ command.receivedAt|date('d/m/Y') }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+{% endblock %}

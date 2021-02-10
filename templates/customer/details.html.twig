@@ -1,0 +1,31 @@
+{% extends 'base_3.html.twig' %}
+
+{% block body %}
+
+    <main class="container">
+        <h1 class="text-center text-uppercase mb-3">{{ customer.getFullName() }}</h1>
+
+        <section class="row my-5">
+            <div class="col-1 col-sm-2"></div>
+            <div class="col-10 col-sm-8 rounded shadow font-light p-2 p-md-4">
+                <p class="mb-1">
+                    <span class="h6 font-poppins">Titre : </span>
+                    <span>{% if customer.title == 'M.' %}Monsieur{% else %}Madame{% endif %}</span></p>
+                <p class="mb-1"><span class="h6 font-poppins">Prénom : </span><span>{{ customer.firstName|capitalize }}</span></p>
+                <p class="mb-1"><span class="h6 font-poppins">Nom : </span><span>{{ customer.lastName|capitalize }}</span></p>
+                <p class="mb-1">
+                    <span class="h6 font-poppins">Téléphone : </span>
+                    <a href="tel:{{ customer.phone }}">{{ customer.phone }}</a>
+                </p>
+                <p class="mb-1">
+                    <span class="h6 font-poppins">Adresse mail : </span>
+                    <a href="mailto:{{ customer.email }}">{{ customer.email }}</a>
+                </p>
+                <p class="mb-1"><span class="h6 font-poppins">Commandes : </span><span>{{ customer.commands|length }}</span></p>
+                <p class="mb-1"><span class="h6 font-poppins">Adresse de livraison : </span><span>{{ customer.addresses|length }}</span></p>
+            </div>
+            <div class="col-1 col-sm-2"></div>
+        </section>
+    </main>
+
+{% endblock %}

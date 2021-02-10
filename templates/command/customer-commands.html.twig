@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes commandes{% endblock %}
+
+{% block body %}
+
+    <main class="container">
+        <h1 class="text-center">MES COMMANDES</h1>
+        {% if commands %}
+            <section class="row mb-3 mb-md-5">
+                {% for command in commands %}
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div class="card text-capitalize">
+                            <div class="card-header bg-teal text-white text-center">
+                                <a href="{{ path('customer_order', {id: command.id}) }}" class="text-white h5">
+                                    <i class="fas fa-file-alt"></i> C{{ command.receivedAt|date('Ym')~command.id }}
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <p class="font-poppins small mb-0">
+                                    date : <span class="font-light">{{ command.receivedAt|date('d-m-Y') }}</span>
+                                </p>
+                                <p class="font-poppins small mb-0">
+                                    état : <span class="font-light">{{ command.state }}</span>
+                                </p>
+                                <p class="font-poppins small mb-0">
+                                    produits : <span class="font-light">{{ command.details|length }}</span>
+                                </p>
+                                <p class="font-poppins small mb-0">
+                                    sous-total : <span class="font-light">{{ command.total|number_format(null, null, ' ') }}F</span>
+                                </p>
+                                <p class="font-poppins small mb-0">
+                                    livraison : <span class="font-light">{{ command.shipping|number_format(null, null, ' ') }}F</span>
+                                </p>
+                                <p class="font-poppins small mb-0">
+                                    livrée le :
+                                    <span class="font-light">
+                                    {% if command.deliveredAt %}{{ command.deliveredAt|date('d-m-Y') }}{% else %}-{% endif %}
+                                </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </section>
+        {% else %}
+            <section class="bg-light text-center py-3 py-md-5 mb-3 mb-md-4">
+                <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+                <p class="font-light mb-0">Vous n'avez passé aucune commande depuis la création de votre compte.</p>
+            </section>
+        {% endif %}
+    </main>
+
+{% endblock %}

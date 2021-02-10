@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande{% endblock %}
+
+{% block body %}
+
+    <main class="container py-3">
+        <h2 class="text-center font-poppins mb-3">COMMANDE C{{ command.receivedAt|date('Ym')~command.id }}</h2>
+        <section class="row justify-content-center text-center text-capitalize py-3 mb-3">
+            <div class="col-6 col-sm-3 mb-2 mb-sm-0">
+                <h6 class="text-secondary font-archer"><i class="fas fa-calendar-alt mr-2"></i>date</h6>
+                <span class="font-light">{{ command.receivedAt|date('d-m-Y') }}</span>
+            </div>
+            <div class="col-6 col-sm-3 mb-2 mb-sm-0">
+                <h6 class="text-primary font-archer"><i class="fas fa-calculator mr-2"></i>sous-total</h6>
+                <span class="font-light">{{ command.total|number_format(null, null, ' ') }}F</span>
+            </div>
+            <div class="col-6 col-sm-3">
+                <h6 class="text-success font-archer"><i class="fas fa-truck mr-2"></i>livraison</h6>
+                <span class="font-light">{{ command.shipping|number_format(null, null, ' ') }}F</span>
+            </div>
+            <div class="col-6 col-sm-3">
+                <h6 class="text-danger font-archer"><i class="fas fa-file-alt mr-2"></i>produits</h6>
+                <span class="font-light">{{ command.details|length }}</span>
+            </div>
+        </section>
+        {% include 'command/details-table.html.twig' %}
+    </main>
+
+{% endblock %}

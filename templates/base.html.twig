@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Calyx Of God{% endblock %}</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script defer src="/js/all.min.js"></script>
+</head>
+<body>
+    {{ render(controller('App\\Controller\\HomeController::navBar')) }}
+
+    {% block body %}{% endblock %}
+
+    <!-- BACK TO TOP -->
+    <a href="#" id="back-to-top" class="bg-teal border border-white position-fixed">
+        <i class="fas fa-arrow-up text-white"></i>
+    </a>
+
+    <!-- INFORMATION -->
+    {% include 'partials/information.html.twig' %}
+
+    <!-- FOOTER -->
+    {% include 'partials/footer.html.twig' %}
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/sticky.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        var url = document.location.origin;
+        $.getJSON(url+'/cart/info', function(data){
+            $('.js-cart-items').text(data.items);
+        });
+    </script>
+    {% block javascripts %}{% endblock %}
+</body>
+</html>

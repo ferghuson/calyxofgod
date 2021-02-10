@@ -1,0 +1,86 @@
+{% extends 'base_3.html.twig' %}
+
+{% block body %}
+    <main class="container pt-3 pt-md-0 pb-3">
+        <h1 class="text-center mb-3 text-uppercase">gestion des produits</h1>
+        {% include('partials/flash.html.twig') %}
+
+        <section class="row mb-3 align-items-center">
+            <div class="col-12 col-md-6 order-1 order-md-0 ">
+                {% if keyword %}
+                    <p class="text-muted text-center font-poppins mb-0">
+                        Résultats de recherche pour « {{ keyword }} »
+                    </p>
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6 order-0 order-md-1">
+                {% include 'product/_search-form.html.twig' %}
+            </div>
+        </section>
+
+        <div class="card">
+            <section class="card-header bg-info d-flex justify-content-between align-items-center">
+                <h4 class="font-poppins text-white mb-0">
+                    <i class="fas fa-file-alt mr-1"></i>Produits
+                </h4>
+                <a href="{{ path('product_add') }}" class="btn btn-light text-capitalize">
+                    <i class="fas fa-plus mr-1"></i>Nouveau Produit
+                </a>
+            </section>
+            <section class="card-body table-responsive">
+                <table class="table mb-0 border-bottom">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Nom</th>
+                        <th class="text-center">Prix</th>
+                        <th class="text-center text-nowrap">Mise en avant</th>
+                        <th class="text-center">Disponible</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if products|length >= 1 %}
+                        {% for product in products %}
+                            <tr>
+                                <td class="text-nowrap">
+                                    <img src="{{ product.image }}" alt="{{ product.slug }}" width="50" height="50">
+                                    <a href="{{ path('product_edit', {id: product.id}) }}">
+                                        {{ product.name|capitalize }}
+                                    </a>
+                                </td>
+                                <td class="text-nowrap text-center">{{ product.price|number_format(null, null, ' ') }}F</td>
+                                <td class="text-center">
+                                    {% if product.selected %}
+                                        Oui
+                                    {% else %}
+                                        Non
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    {% if product.availability %}
+                                        <i class="fas fa-check text-success"></i>
+                                    {% else %}
+                                        <i class="fas fa-exclamation-triangle text-warning"></i>
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ path('product_remove', {id: product.id}) }}">
+                                        <i class="fas fa-trash text-danger"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr class="text-danger text-center">
+                            <td colspan="5" class="font-poppins">
+                                <i class="fas fa-exclamation-triangle mr-1"></i>Aucun produit trouvé !
+                            </td>
+                        </tr>
+                    {% endif %}
+
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Calyx Of God{% endblock %}</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script defer src="/js/all.min.js"></script>
+</head>
+<body>
+    {{ render(controller('App\\Controller\\HomeController::navbar')) }}
+
+    {% block body %}{% endblock %}
+
+    <!-- BACK TO TOP -->
+    {% include('partials/back-to-top.html.twig') %}
+
+    <!-- FOOTER -->
+    {% include 'partials/footer.html.twig' %}
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/sticky.js"></script>
+    <script src="/js/main.js"></script>
+    {% block javascripts %}{% endblock %}
+</body>
+</html>

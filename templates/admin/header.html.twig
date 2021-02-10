@@ -1,0 +1,39 @@
+<header>
+    <section id="header-1" class="px-3 shadow-sm bg-white">
+        <div class="row align-items-center">
+            <div class="col-2 col-md-3">
+                <a href="#" class="text-dark d-md-none nav-toggler"><i class="fas fa-bars fa-2x nav-toggler-icon"></i></a>
+                <a href="{{ path('home') }}" class="d-none d-md-inline nav-link" target="_blank">BOUTIQUE</a>
+            </div>
+            <div class="col-8 col-md-6">
+                <span class="logo d-block">calyx of god</span>
+            </div>
+            <div class="col-2 col-md-3 text-right">
+                <a href="{{ path('admin_logout') }}" class="text-danger">
+                    <i class="fas fa-power-off fa-2x"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="header-2" class="p-md-2">
+        <div class="container responsive-nav">
+            <div class="d-md-flex justify-content-md-center">
+                <ul class="main-nav nav nav-fill">
+                    <li class="nav-item d-md-none"><a href="{{ path('home') }}" target="_blank" class="nav-link">Boutique</a></li>
+                    <li class="nav-item"><a href="{{ path('admin_index') }}" class="nav-link">Tableau de bord</a></li>
+                    <li class="nav-item"><a href="{{ path('command_index') }}" class="nav-link">Commandes</a></li>
+                    <li class="nav-item"><a href="{{ path('product_all') }}" class="nav-link">Produits</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">Catalogues</a>
+                        <ul class="dropdown-menu shadow-sm rounded-0 border-0 pl-0 bg-white">
+                            <li class="dropdown-item"><a href="{{ path('collection_all') }}">Collections</a></li>
+                            <li class="dropdown-item"><a href="{{ path('category_all') }}">Catégories</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a href="{{ path('customer_all') }}" class="nav-link">Clients</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</header>

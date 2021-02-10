@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+    <main class="container py-3 pt-md-4 pb-md-5">
+        <h1 class="text-center mb-3 mb-md-4">PANIER</h1>
+        {% if items == 0 %}
+            <section class="bg-light text-center py-3 py-md-5 mb-3 mb-md-4">
+                <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+                <p class="font-light mb-0">Votre panier est vide.</p>
+            </section>
+        {% else %}
+            <section>
+                <div class="row d-none d-md-flex font-light">
+                    <div class="col-1"></div>
+                    <div class="col-6 pb-2 border-bottom">Produit</div>
+                    <div class="col-2 pb-2 text-right border-bottom">Quantité</div>
+                    <div class="col-2 pb-2 text-right border-bottom">Total</div>
+                    <div class="col-1"></div>
+                </div>
+                {% for item in cart %}
+                    <div class="row mb-3 mb-md-0">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <div class="row">
+                                <div class="col-12 col-md-8 cart-product">
+                                    <div class="row py-md-3 mb-2 mb-md-0">
+                                        <div class="col-6 col-md-3 mb-2 mb-md-0">
+                                            <img src="{{ item.product.image }}" alt="{{ item.product.slug }}" class="img-fluid">
+                                        </div>
+                                        <div class="col-6 col-md-9">
+                                            <h4 class="text-teal font-archer mb-1">{{ item.product.name|capitalize }}</h4>
+                                            <p class="font-light mb-1 mb-md-3">
+                                                <span id="js-{{ item.product.id }}-price">{{ item.product.price }}</span>F
+                                            </p>
+                                            <small>
+                                                <a href="{{ path('cart_remove', {'product': item.product.id}) }}" class="text-danger text-uppercase">
+                                                    supprimer
+                                                </a>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-2 cart-quantity">
+                                    <div class="product-qty mt-md-3 d-inline-flex d-md-block align-items-center">
+                                        <label for="quantity" class="d-block d-md-none mr-2 mb-0">Quantité:</label>
+                                        <input type="number" class="form-control rounded-0 quantity" min="1" value="{{ item.quantity }}">
+                                        <input type="hidden" value="{{ item.product.id }}">
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-2 cart-total font-light text-md-right pt-2 pt-md-4">
+                                    <div class="d-inline-flex d-md-block align-items-center">
+                                        <label for="total" class="d-block d-md-none mr-2 mb-0">Total:</label>
+                                        <span id="js-{{ item.product.id }}-total">{{ item.product.price * item.quantity }}</span>F
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <hr class="mt-0 mb-3 d-md-none">
+                {% endfor %}
+                <div class="row mb-3">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <div class="row font-light pt-0 pb-3 py-md-3">
+                            <div class="col-12 col-md-6">
+                                <p>Frais de livraison calculé à la commande</p>
+                            </div>
+                            <div class="col-4 col-md-3 text-md-right">
+                                <span class="sub-total">Sous-total</span>
+                            </div>
+                            <div class="col-4 col-md-3 text-md-right sub-total">
+                                <span class="js-cart-total">{{ total }}</span>F
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ path('home') }}" class="nav-link">
+                                <i class="fas fa-long-arrow-alt-left mr-1"></i>Continuer
+                            </a>
+                            <a href="{{ path('order_address') }}" class="btn bg-teal text-white rounded-0">COMMANDER</a>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </section>
+        {% endif %}
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/cart.js"></script>
+{% endblock %}

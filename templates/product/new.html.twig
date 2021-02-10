@@ -1,0 +1,28 @@
+{% extends 'base_3.html.twig' %}
+
+{% block body %}
+
+    <main class="container">
+        <h2 class="text-center mb-3 text-uppercase">Nouveau Produit</h2>
+        {% include('partials/flash.html.twig') %}
+        <section class="row">
+            <div class="col-12 col-md-8 offset-md-2 py-3 rounded shadow">
+                {{ form_start(form) }}
+                <div class="form-group">
+                    <label for="product_collection">Collection</label>
+                    <select class="form-control" name="collection">
+                        {% for collection in collections %}
+                            <option value="{{ collection.id }}">{{ collection.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {{ form_widget(form) }}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary py-2 px-3">Ajouter</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </section>
+    </main>
+
+{% endblock %}

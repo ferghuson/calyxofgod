@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+
+    <main class="container">
+        <section class="text-center mb-3">
+            <h1 class="text-uppercase">nous contacter</h1>
+            <p class="font-light mb-1">
+                Vous souhaiter obtenir des informations sur un produit vendu ou vous avez
+                des questions au sujet d'une commande ?
+            </p>
+            <p class="font-light">
+                <span class="text-nowrap">{{ 'écrivez-nous'|capitalize }} : <a href="mailto:calyxofgod@gmail.com">calyxofgod@gmail.com</a></span> ou
+                <span class="text-nowrap">
+                    Appellez-nous : <a href="tel:96224812">96 22 48 16</a> | <a href="tel:79700127">79 70 01 27</a> | <a href="tel:96261831">96 26 18 31</a>
+                </span>
+            </p>
+        </section>
+        {% include 'partials/flash.html.twig' %}
+        <section class="row">
+            <div class="col-md-2"></div>
+            <div class="col-12 col-md-8 mb-3">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary rounded-0">
+                        envoyez <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+            <div class="col-md-2"></div>
+        </section>
+    </main>
+
+{% endblock %}

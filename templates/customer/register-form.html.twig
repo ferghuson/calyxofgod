@@ -1,0 +1,36 @@
+{{ form_start(form) }}
+    {{ form_row(form.title) }}
+    <div class="row">
+        <div class="col-12 col-sm-6">{{ form_row(form.firstName) }}</div>
+        <div class="col-12 col-sm-6">{{ form_row(form.lastName) }}</div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6">{{ form_row(form.email) }}</div>
+        <div class="col-12 col-sm-6">{{ form_row(form.phone) }}</div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.password) }}
+        <div class="input-group">
+            {{ form_widget(form.password) }}
+            <div class="input-group-append">
+                <button type="button" data-action="show-pwd" class="bg-transparent py-1 rounded-right">
+                    <i class="fa fa-eye-slash eye-icon text-teal"></i>
+                </button>
+            </div>
+        </div>
+        <small class="font-light">{{ form_help(form.password) }}</small>
+    </div>
+    <!--<div class="form-group">
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" required>
+                J'ai lu et j'accepte les conditions générales de vente
+            </label>
+        </div>
+    </div> -->
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary rounded-0">
+            créer mon compte
+        </button>
+    </div>
+{{ form_end(form) }}

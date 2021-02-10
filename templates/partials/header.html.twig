@@ -1,0 +1,88 @@
+<header>
+    <section id="header-1" class="px-3 shadow-sm bg-white">
+        <div class="row align-items-center">
+            <div class="col-2 col-md-3">
+                <a href="#" class="text-dark d-md-none nav-toggler"><i class="fas fa-bars fa-2x nav-toggler-icon"></i></a>
+                <a href="{{ path('about') }}" class="d-none d-md-inline nav-link">A PROPOS</a>
+                <a href="{{ path('contact') }}" class="d-none d-md-inline nav-link">CONTACT</a>
+            </div>
+            <div class="col-8 col-md-6">
+                <span class="logo d-block">calyx of god</span>
+                <form action="{{ path('product_search') }}" class="search-form d-none">
+                    <div class="input-group search-bar">
+                        <div class="input-group-prepend">
+                            <button type="submit" class="bg-white text-teal">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                        <input type="search" class="form-control rounded-0 search-input" name="q" placeholder="Rechercher" required>
+                    </div>
+                </form>
+            </div>
+            <div class="col-2 col-md-3 d-md-flex justify-content-md-around text-center">
+                <a href="#" class="d-none d-md-inline text-muted search-toggler"><i class="fas fa-search search-toggler-icon resize"></i></a>
+                <a href="{{ path('customer_index') }}" class="d-none d-md-inline text-muted"><i class="fas fa-user-alt resize"></i></a>
+                <a href="{{ path('cart_index') }}" class="position-relative">
+                    {% include 'partials/icons/shopping-bag.html.twig' %}
+                    <span class="js-cart-items text-teal position-absolute"></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="header-2" class="p-md-2">
+        <div class="container responsive-nav">
+            <div class="d-md-flex justify-content-md-center">
+                <div class="d-md-none mb-3 mb-md-0">
+                    <form action="{{ path('product_search') }}">
+                        <div class="input-group search-bar">
+                            <div class="input-group-prepend">
+                                <button type="submit" class="bg-white text-teal">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                            <input type="search" class="form-control rounded-0" name="q" placeholder="Rechercher" required>
+                        </div>
+                    </form>
+                </div>
+                <ul class="main-nav nav nav-fill">
+                    <li class="nav-item"><a href="{{ path('home') }}" class="nav-link">ACCUEIL</a></li>
+                    {% for category in categories %}
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle">{{ category.name|upper }}</a>
+                            <ul class="dropdown-menu shadow-sm rounded-0 border-0 pl-0 bg-white">
+                                {% for collection in category.collections %}
+                                    <li class="dropdown-item">
+                                        <a href="{{ path('collection_detail', {slug: collection.slug}) }}">
+                                            {{ collection.name|capitalize }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="d-md-none">
+                    <hr>
+                    <ul class="list-unstyled text-capitalize">
+                        <li>
+                            <a href="{{ path('customer_index') }}" class="font-light text-teal">
+                                <i class="fas fa-user mr-2"></i>mon compte
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('about') }}" class="font-light text-teal">
+                                <i class="fas fa-info-circle mr-2"></i>a propos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('contact') }}" class="font-light text-teal">
+                                <i class="fas fa-phone-alt mr-2"></i>contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>
